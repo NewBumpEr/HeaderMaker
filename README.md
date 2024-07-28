@@ -44,7 +44,7 @@ Follow these steps to install HeaderMaker on your system:
 1. **Clone the Repository:**
 
   ```bash
-   git clone https://github.com/NewBumpEr/headermaker.git
+   git clone https://github.com/NewBumpEr/HeaderMaker.git
    ```
 
 2. **Navigate to the Project Directory:**
