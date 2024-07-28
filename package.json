@@ -1,0 +1,47 @@
+{
+  "name": "headermaker",
+  "version": "1.0.0",
+  "description": "HeaderMaker is a simple application for easily adding and removing headers from project files within a selected directory.",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-packager . HeaderMaker --platform=win32 --arch=x64 --out=release-builds --overwrite --icon=app/assets/icon/icon.ico",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Bump_Er",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.3.0",
+    "electron-builder": "^24.3.0",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.bumper.headermaker",
+    "productName": "HeaderMaker",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "app/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "app/assets/icon/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "app/assets/icon/icon.ico",
+      "uninstallerIcon": "app/assets/icon/icon.ico",
+      "uninstallDisplayName": "HeaderMaker-Uninstaller",
+      "license": "LICENSE",
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true
+    }
+  }
+}
