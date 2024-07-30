@@ -1,5 +1,6 @@
 node_modules/
 release-builds/
+test/
 
 .DS_Store
 Thumbs.db
@@ -7,3 +8,5 @@ dist/
 build/
 .env
 *.log
+
+out/

@@ -1,334 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HeaderMaker</title>
-  <style>
-      body, html {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-family: Arial, sans-serif;
-          background-color: #f5f5f5;
-          position: relative;
-      }
-
-      .container {
-          max-width: 1000px;
-          width: 100%;
-          padding: 20px;
-          background-color: white;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          border-radius: 12px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-
-      .icon {
-          font-size: 80px;
-          color: #4CAF50;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: -10px;
-          margin-bottom: -10px;
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          background-color: #e0e0e0;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          transition: opacity 0.3s ease;
-      }
-
-      .icon img {
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          object-fit: cover;
-      }
-
-      .card {
-          width: 100%;
-          padding: 20px;
-          background-color: #fff;
-          border-radius: 12px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-
-      h1 {
-          margin-bottom: 20px;
-          color: #333;
-      }
-
-      .button {
-          margin: 10px 0;
-          padding: 12px 24px;
-          background-color: #4CAF50;
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 18px;
-          transition: background-color 0.3s;
-          width: 100%;
-      }
-
-      .button-help{
-          margin: 10px 0;
-          padding: 12px 24px;
-          background-color: #654caf;
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 18px;
-          transition: background-color 0.3s;
-          width: 100%;
-      }
-
-      .button_select-folder {
-          margin: 10px 0;
-          padding: 12px 24px;
-          background-color: #4CAF50;
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 18px;
-          transition: background-color 0.3s;
-          width: 30%;
-      }
-
-      .button:hover {
-          background-color: #45a049;
-      }
-
-      .button.danger {
-          background-color: #f44336;
-      }
-
-      .button.danger:hover {
-          background-color: #d32f2f;
-      }
-
-      .button.secondary {
-          background-color: #007bff;
-      }
-
-      .button.secondary:hover {
-          background-color: #0056b3;
-      }
-
-      .header-editor {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin: 20px 0;
-          width: 100%;
-      }
-
-      .textarea-container {
-          width: 48%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-
-      .header-preview-container {
-          width: 48%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-
-      textarea {
-          width: 100%;
-          height: 150px;
-          margin: 10px 0;
-          padding: 12px;
-          font-size: 16px;
-          border-radius: 8px;
-          border: 1px solid #ddd;
-          box-sizing: border-box;
-          resize: vertical;
-      }
-
-      .header-preview {
-          width: 100%;
-          height: 150px;
-          margin: 10px 0;
-          padding: 12px;
-          font-size: 16px;
-          border-radius: 8px;
-          border: 1px solid #ddd;
-          box-sizing: border-box;
-          overflow-y: auto;
-          background-color: #f7f7f7;
-          white-space: pre-wrap;
-          text-align: left;
-          color: #555;
-      }
-
-      .options-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 100%;
-      }
-
-      .checkbox-group {
-          text-align: left;
-          margin: 20px 0;
-          padding: 20px;
-          background-color: #f9f9f9;
-          border-radius: 8px;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-          width: 44%;
-      }
-
-      .checkbox-group h2 {
-          margin-bottom: 10px;
-          font-size: 18px;
-          color: #333;
-      }
-
-      .checkbox-group label {
-          display: block;
-          margin: 5px 0;
-          font-size: 16px;
-          color: #555;
-      }
-
-      .button-group {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          margin: 20px 0;
-          width: 48%;
-      }
-
-      .button-row {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          gap: 10px;
-      }
-
-      .small-button {
-          width: 20%;
-      }
-
-      #header-options {
-          display: none;
-          width: 100%;
-      }
-
-      #selected-directory {
-          margin: 15px 0;
-          font-size: 16px;
-          font-weight: bold;
-          color: #333;
-      }
-
-      #status_successfully {
-          display: flex;
-          justify-content: center;
-          margin-top: 20px;
-          color: #28a745;
-          font-weight: bold;
-      }
-
-      #status_error {
-          display: flex;
-          justify-content: center;
-          margin-top: 20px;
-          color: #a72828;
-          font-weight: bold;
-      }
-
-      .created-by {
-          position: absolute;
-          left: 10px;
-          bottom: 10px;
-          font-size: 16px;
-          color: #128805;
-          font-weight: bold;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-          background-color: rgba(255, 255, 255, 0.8);
-          padding: 5px 10px;
-          border-radius: 5px;
-      }
-
-      .created-by a {
-          text-decoration: none;
-          color: #007bff;
-          transition: color 0.3s;
-      }
-
-      .created-by a:hover {
-          color: #0056b3;
-      }
-
-      .modal {
-          display: none;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-      }
-
-      .modal-content {
-          background-color: #fff;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          max-width: 500px;
-          width: 80%;
-      }
-
-      .modal-content h2 {
-          text-align: center;
-          margin-bottom: 20px;
-          font-size: 24px;
-      }
-
-      .modal-content p {
-          text-align: left;
-          margin-bottom: 15px;
-          font-size: 16px;
-          line-height: 1.5;
-          color: #333;
-      }
-
-      .close-modal {
-          display: block;
-          margin: 0 auto;
-          padding: 12px 24px;
-          background-color: #4c6baf;
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 18px;
-          transition: background-color 0.3s;
-          width: 30%;
-          text-align: center;
-      }
-  </style>
+  <link rel="stylesheet" href="./index.css">
 </head>
 <body>
 <div class="container">
@@ -348,13 +24,17 @@
         <div class="textarea-container">
           <h2>Enter Header</h2>
           <textarea id="header-text" placeholder="Your header here"></textarea>
-
         </div>
 
         <div class="header-preview-container">
           <h2>View</h2>
+
           <div class="header-preview" id="header-view"></div>
         </div>
+      </div>
+
+      <div>
+        <button id="open-template-modal" class="button">Select Template</button>
       </div>
 
       <div class="options-container">
@@ -364,15 +44,13 @@
           <label><input type="checkbox" value=".jsx"> .jsx</label>
           <label><input type="checkbox" value=".ts"> .ts</label>
           <label><input type="checkbox" value=".tsx"> .tsx</label>
-          <!--<label><input type="checkbox" value=".html"> .html</label>-->
-          <!--<label><input type="checkbox" value=".css"> .css</label>-->
         </div>
 
         <div class="button-group">
-          <button id="add-headers" class="button">Add Headers</button>
+          <button id="add-headers" class="button-add">Add Headers</button>
           <div class="button-row">
             <button id="remove-headers" class="button danger">Remove Headers</button>
-            <button id="help-button" class="button-help secondary small-button">Help</button>
+            <button id="help-button" class="button-help secondary small-button">?</button>
           </div>
           <button id="back-to-menu" class="button secondary">Back to Menu</button>
         </div>
@@ -385,6 +63,140 @@
 
   <div class="created-by">
     Created by: <a href="https://github.com/NewBumpEr" target="_blank">BumpEr</a>
+  </div>
+  <div class="help" id="help-btn">
+    Help
+  </div>
+</div>
+
+<div id="template-modal" class="modal-template">
+  <div class="modal-content-template">
+    <h2>Select a Template</h2>
+    <div class="template-container">
+      <div class="template-column">
+        <div class="template-item">
+          <div class="template-title">Header with Name</div>
+          <div class="description">
+            Project: [Project Name]
+            <br />
+            Author: [Enter Your Name]
+            <br />
+            Date: [Enter Date]
+            <br />
+            Description: [Project Description]
+          </div>
+          <div
+            class="template-description"
+            data-template="Project: [Project Name]
+Author: [Enter Your Name]
+Date: [Enter Date]
+Description: [Project Description]"
+          >
+            A header including project name, author, date, and description.
+          </div>
+        </div>
+        <div class="template-item">
+          <div class="template-title">Header with License</div>
+          <div class="description">
+            Project: [Project Name] - [Short Description]
+            <br />
+            Copyright (c) [Year] [Your Name]
+            <br />
+            Licensed under the [License Name] License
+          </div>
+          <div
+            class="template-description"
+            data-template="Project: [Project Name] - [Short Description]
+Copyright © [Year] [Your Name]
+Licensed under the [License Name] License"
+          >
+            A header with project name, copyright, and license information.
+          </div>
+        </div>
+        <div class="template-item">
+          <div class="template-title">Minimal Header</div>
+          <div class="description">
+            [Project Name] by [Your Name], [Year]
+          </div>
+          <div
+            class="template-description"
+            data-template="[Project Name] by [Your Name], [Year]"
+          >
+            A minimal header with project name and author.
+          </div>
+        </div>
+      </div>
+      <div class="template-column">
+        <div class="template-item">
+          <div class="template-title">Detailed Header</div>
+          <div class="description">
+            Project: [Project Name]
+            <br />
+            Author: [Your Name]
+            <br />
+            Date Created: [Creation Date]
+            <br />
+            Last Modified: [Modification Date]
+            <br />
+            Description: [Detailed Project Description]
+          </div>
+          <div
+            class="template-description"
+            data-template="Project: [Project Name]
+Author: [Your Name]
+Date Created: [Creation Date]
+Last Modified: [Modification Date]
+Description: [Detailed Project Description]"
+          >
+            A detailed header including project and modification details.
+          </div>
+        </div>
+        <div class="template-item">
+          <div class="template-title">Header with Version</div>
+          <div class="description">
+            Project: [Project Name]
+            <br />
+            Author: [Your Name]
+            <br />
+            Date: [Date]
+            <br />
+            Description: [Description]
+          </div>
+          <div
+            class="template-description"
+            data-template="Project: [Project Name]
+Version: [Version Number]
+Author: [Your Name]
+Date: [Date]
+Description: [Description]"
+          >
+            A header that includes versioning information.
+          </div>
+        </div>
+        <div class="template-item">
+          <div class="template-title">Header with Contact</div>
+          <div class="description">
+            Project: [Project Name]
+            <br />
+            Author: [Your Name] ([Your Email])
+            <br />
+            Created: [Creation Date]
+            <br />
+            Description: [Description]
+          </div>
+          <div
+            class="template-description"
+            data-template="Project: [Project Name]
+Author: [Your Name] ([Your Email])
+Created: [Creation Date]
+Description: [Description]"
+          >
+            A header with author’s contact information.
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="close-modal">Close</button>
   </div>
 </div>
 
@@ -406,115 +218,48 @@
   </div>
 </div>
 
+<div id="help-modal" class="modal">
+  <div class="modal-content">
+    <h2>How to Use HeaderMaker</h2>
+    <p>
+      Welcome to <strong>HeaderMaker</strong>, your go-to tool for adding custom headers to your files with ease. Follow
+      these steps to get started:
+    </p>
+    <ol>
+      <li>
+        <strong>Select Project Folder:</strong> Click on the <strong>Select Folder</strong> button to open the main
+        project directory where you want to add headers. This step ensures that the headers are applied to the correct
+        files within your project.
+      </li>
+      <li>
+        <strong>Enter the Header:</strong> Type the custom header text you want to add in the <strong>Enter
+        Header</strong> field.
+      </li>
+      <li>
+        <strong>Select a Template:</strong> Click on the <strong>Select Template</strong> button to choose a predefined
+        header.
+      </li>
+      <li>
+        <strong>Select File Types:</strong> Choose the file types to which you want the header added. Ensure you select
+        all the relevant types to apply the changes effectively.
+      </li>
+      <li>
+        <strong>Preview Changes:</strong> Use the preview feature to see how the headers will look in your files before
+        finalizing the changes.
+      </li>
+      <li>
+        <strong>Apply Changes:</strong> Once you’re satisfied with your header and selections, click <strong>Add
+        Headers</strong> to apply the headers to the chosen files.
+      </li>
+    </ol>
+    <p>
+      By following these steps, you can efficiently manage and update file headers, ensuring consistency and
+      professionalism across your projects.
+    </p>
+    <button class="close-modal">Close</button>
+  </div>
+</div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const helpButton = document.getElementById('help-button');
-    const modal = document.getElementById('info-modal');
-    const closeModalButton = modal.querySelector('.close-modal');
-
-    helpButton.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
-
-    closeModalButton.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  });
-
-  document.getElementById('select-directory').addEventListener('click', async () => {
-    const directoryPath = await window.electron.selectDirectory();
-    if (directoryPath) {
-      document.getElementById('selected-directory').textContent = `Selected Folder: ${directoryPath}`;
-      window.selectedDirectoryPath = directoryPath;
-
-      document.getElementById('header-options').style.display = 'block';
-
-      document.getElementById('select-directory').style.display = 'none';
-    }
-  });
-
-  document.getElementById('add-headers').addEventListener('click', async () => {
-    const header = document.getElementById('header-view').textContent.trim();
-    const fileTypes = Array.from(document.getElementById('file-types').querySelectorAll('input[type=checkbox]:checked')).map(checkbox => checkbox.value);
-    const directoryPath = window.selectedDirectoryPath;
-
-    if (!directoryPath) {
-      document.getElementById('status_error').textContent = 'Please select a folder before adding headers.';
-      return;
-    }
-
-    if (!header) {
-      document.getElementById('status_error').textContent = 'Please enter a header!';
-      return;
-    }
-    if (fileTypes.length === 0) {
-      document.getElementById('status_error').textContent = 'Please select at least one file type!';
-      return;
-    }
-
-    await window.electron.addHeaders(directoryPath, header, fileTypes);
-    document.getElementById('status_successfully').textContent = 'Headers added successfully!';
-    document.getElementById('status_error').textContent = '';
-  });
-
-  document.getElementById('remove-headers').addEventListener('click', async () => {
-    const header = document.getElementById('header-view').textContent.trim();
-    const fileTypes = Array.from(document.getElementById('file-types').querySelectorAll('input[type=checkbox]:checked')).map(checkbox => checkbox.value);
-    const directoryPath = window.selectedDirectoryPath;
-
-    if (!directoryPath) {
-      document.getElementById('status_error').textContent = 'Please select a folder before removing headers.';
-      return;
-    }
-
-    if (!header) {
-      document.getElementById('status_error').textContent = 'Please enter a header!';
-      return;
-    }
-    if (fileTypes.length === 0) {
-      document.getElementById('status_error').textContent = 'Please select at least one file type!';
-      return;
-    }
-
-    await window.electron.removeHeaders(directoryPath, header, fileTypes);
-    document.getElementById('status_successfully').textContent = 'Headers removed successfully!';
-    document.getElementById('status_error').textContent = '';
-  });
-
-  document.getElementById('back-to-menu').addEventListener('click', () => {
-    document.getElementById('header-options').style.display = 'none';
-    document.getElementById('select-directory').style.display = 'block';
-
-    document.getElementById('selected-directory').textContent = '';
-    window.selectedDirectoryPath = null;
-
-    document.getElementById('header-text').value = '';
-    document.getElementById('header-view').textContent = '';
-
-    document.getElementById('file-types').querySelectorAll('input[type=checkbox]').forEach(checkbox => {
-      checkbox.checked = false;
-    });
-
-    document.getElementById('status_successfully').textContent = '';
-    document.getElementById('status_error').textContent = '';
-  });
-
-
-  document.getElementById('header-text').addEventListener('input', () => {
-    const headerText = document.getElementById('header-text').value;
-
-    const formattedHeader = `// ${headerText.replace(/\n/g, '\n// ')} `;
-
-    document.getElementById('header-view').textContent = formattedHeader;
-  });
-</script>
-
+<script src="index.js"></script>
 </body>
 </html>
