@@ -23,7 +23,7 @@
 ## Introduction
 
 **HeaderMaker** is a desktop application designed to create custom header comments for your
-code files. Whether you're a developer looking to standardize your codebase or a project manager aiming for better code
+code files within a selected directory. Whether you're a developer looking to standardize your codebase or a project manager aiming for better code
 documentation, HeaderMaker provides seamless header generation.
 
 ---
