@@ -14,6 +14,7 @@
     </div>
 
     <h1>HeaderMaker</h1>
+    <h2 class="version">v1.0.2</h2>
 
     <button id="select-directory" class="button_select-folder">Select Folder</button>
 
@@ -39,12 +40,21 @@
 
       <div class="options-container">
         <div class="checkbox-group" id="file-types">
-          <h2>Select File Types</h2>
-          <label><input type="checkbox" value=".js"> .js</label>
-          <label><input type="checkbox" value=".jsx"> .jsx</label>
-          <label><input type="checkbox" value=".ts"> .ts</label>
-          <label><input type="checkbox" value=".tsx"> .tsx</label>
+          <div class="checkbox-column">
+            <label><input type="checkbox" value=".js"> .js</label>
+            <label><input type="checkbox" value=".jsx"> .jsx</label>
+            <label><input type="checkbox" value=".ts"> .ts</label>
+            <label><input type="checkbox" value=".tsx"> .tsx</label>
+          </div>
+          <div class="checkbox-header">
+            <span>Select File Types</span>
+          </div>
+          <div class="checkbox-column">
+            <label><input type="checkbox" value=".html"> .html</label>
+            <label><input type="checkbox" value=".css"> .css</label>
+          </div>
         </div>
+
 
         <div class="button-group">
           <button id="add-headers" class="button-add">Add Headers</button>

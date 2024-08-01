@@ -442,3 +442,36 @@ textarea {
     text-align: center;
     color: #000000;
 }
+
+#file-types input[type="checkbox"]:disabled + label {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.checkbox-group {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkbox-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-column label {
+    margin-bottom: 10px;
+}
+
+.checkbox-header {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.version{
+    margin-top: -20px;
+}

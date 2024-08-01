@@ -72,6 +72,10 @@ document.getElementById('add-headers').addEventListener('click', async () => {
   await window.electron.addHeaders(directoryPath, header, fileTypes);
   document.getElementById('status_successfully').textContent = 'Headers added successfully!';
   document.getElementById('status_error').textContent = '';
+
+  setTimeout(() => {
+    document.getElementById('status_successfully').textContent = '';
+  }, 3000);
 });
 
 document.getElementById('remove-headers').addEventListener('click', async () => {
@@ -96,6 +100,10 @@ document.getElementById('remove-headers').addEventListener('click', async () => 
   await window.electron.removeHeaders(directoryPath, header, fileTypes);
   document.getElementById('status_successfully').textContent = 'Headers removed successfully!';
   document.getElementById('status_error').textContent = '';
+
+  setTimeout(() => {
+    document.getElementById('status_successfully').textContent = '';
+  }, 3000);
 });
 
 document.getElementById('back-to-menu').addEventListener('click', () => {
@@ -116,13 +124,25 @@ document.getElementById('back-to-menu').addEventListener('click', () => {
   document.getElementById('status_error').textContent = '';
 });
 
-document.getElementById('header-text').addEventListener('input', () => {
+function updateHeaderPreview() {
   const headerText = document.getElementById('header-text').value;
+  const fileTypes = Array.from(document.getElementById('file-types').querySelectorAll('input[type=checkbox]:checked')).map(checkbox => checkbox.value);
+  const headerView = document.getElementById('header-view');
 
-  const formattedHeader = `// ${headerText.replace(/\n/g, '\n// ')} `;
+  let formattedHeader = headerText;
 
-  document.getElementById('header-view').textContent = formattedHeader;
-});
+  if (fileTypes.includes('.html')) {
+    formattedHeader = `<!--\n${headerText.replace(/\n/g, '\n')}\n-->`;
+  } else if (fileTypes.includes('.css')) {
+    formattedHeader = `/*\n${headerText.replace(/\n/g, '\n')}\n*/`;
+  } else {
+    formattedHeader = `// ${headerText.replace(/\n/g, '\n// ')}`;
+  }
+
+  headerView.textContent = formattedHeader;
+}
+
+document.getElementById('header-text').addEventListener('input', updateHeaderPreview);
 
 document.addEventListener('DOMContentLoaded', () => {
   const openTemplateModalButton = document.getElementById('open-template-modal');
@@ -144,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     template.addEventListener('click', () => {
       const templateContent = template.querySelector('.template-description').getAttribute('data-template');
       headerTextArea.value = templateContent;
-      headerView.textContent = `// ${templateContent.replace(/\n/g, '\n// ')} `;
+      updateHeaderPreview();
       templateModal.style.display = 'none';
     });
   });
@@ -154,4 +174,48 @@ document.addEventListener('DOMContentLoaded', () => {
       templateModal.style.display = 'none';
     }
   });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const fileTypeCheckboxes = document.querySelectorAll(
+    '#file-types input[type="checkbox"]'
+  );
+
+  fileTypeCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', handleCheckboxChange);
+  });
+
+  function handleCheckboxChange(event) {
+    const selectedValue = event.target.value;
+
+    if (selectedValue === '.html' || selectedValue === '.css') {
+      if (event.target.checked) {
+        fileTypeCheckboxes.forEach((checkbox) => {
+          if (checkbox !== event.target) {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+          }
+        });
+      } else {
+        fileTypeCheckboxes.forEach((checkbox) => {
+          checkbox.disabled = false;
+        });
+      }
+    } else {
+      const htmlCheckbox = document.querySelector(
+        '#file-types input[value=".html"]'
+      );
+      const cssCheckbox = document.querySelector(
+        '#file-types input[value=".css"]'
+      );
+
+      if (!htmlCheckbox.checked && !cssCheckbox.checked) {
+        fileTypeCheckboxes.forEach((checkbox) => {
+          checkbox.disabled = false;
+        });
+      }
+    }
+
+    updateHeaderPreview();
+  }
 });
