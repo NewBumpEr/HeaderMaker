@@ -33,7 +33,7 @@ documentation, HeaderMaker provides seamless header generation.
 - **Customizable Header Formats:** Define and customize your header formats to match your project's needs.
 - **Intuitive User Interface:** Navigate the application effortlessly with a clean and modern UI.
 - **Real-Time Preview:** See your header designs update instantly as you modify them.
-- **Multiple File Support:** Generate headers for various file types, including JavaScript, TypeScript, JSX, TSX.
+- **Multiple File Support:** Generate headers for various file types, including JavaScript, TypeScript, JSX, TSX, HTML, and CSS, with more file types coming soon.
 
 ---
 
