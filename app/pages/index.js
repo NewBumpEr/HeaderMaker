@@ -45,7 +45,6 @@ document.getElementById('select-directory').addEventListener('click', async () =
     window.selectedDirectoryPath = directoryPath;
 
     document.getElementById('header-options').style.display = 'block';
-
     document.getElementById('select-directory').style.display = 'none';
   }
 });
@@ -56,26 +55,21 @@ document.getElementById('add-headers').addEventListener('click', async () => {
   const directoryPath = window.selectedDirectoryPath;
 
   if (!directoryPath) {
-    document.getElementById('status_error').textContent = 'Please select a folder before adding headers.';
+    showToast('error', 'Please select a folder before adding headers.');
     return;
   }
 
   if (!header) {
-    document.getElementById('status_error').textContent = 'Please enter a header!';
+    showToast('error', 'Please enter a header!');
     return;
   }
   if (fileTypes.length === 0) {
-    document.getElementById('status_error').textContent = 'Please select at least one file type!';
+    showToast('error', 'Please select at least one file type!');
     return;
   }
 
   await window.electron.addHeaders(directoryPath, header, fileTypes);
-  document.getElementById('status_successfully').textContent = 'Headers added successfully!';
-  document.getElementById('status_error').textContent = '';
-
-  setTimeout(() => {
-    document.getElementById('status_successfully').textContent = '';
-  }, 3000);
+  showToast('success', 'Headers added successfully!');
 });
 
 document.getElementById('remove-headers').addEventListener('click', async () => {
@@ -84,26 +78,21 @@ document.getElementById('remove-headers').addEventListener('click', async () => 
   const directoryPath = window.selectedDirectoryPath;
 
   if (!directoryPath) {
-    document.getElementById('status_error').textContent = 'Please select a folder before removing headers.';
+    showToast('error', 'Please select a folder before removing headers.');
     return;
   }
 
   if (!header) {
-    document.getElementById('status_error').textContent = 'Please enter a header!';
+    showToast('error', 'Please enter a header!');
     return;
   }
   if (fileTypes.length === 0) {
-    document.getElementById('status_error').textContent = 'Please select at least one file type!';
+    showToast('error', 'Please select at least one file type!');
     return;
   }
 
   await window.electron.removeHeaders(directoryPath, header, fileTypes);
-  document.getElementById('status_successfully').textContent = 'Headers removed successfully!';
-  document.getElementById('status_error').textContent = '';
-
-  setTimeout(() => {
-    document.getElementById('status_successfully').textContent = '';
-  }, 3000);
+  showToast('success', 'Headers removed successfully!');
 });
 
 document.getElementById('back-to-menu').addEventListener('click', () => {
@@ -119,9 +108,6 @@ document.getElementById('back-to-menu').addEventListener('click', () => {
   document.getElementById('file-types').querySelectorAll('input[type=checkbox]').forEach(checkbox => {
     checkbox.checked = false;
   });
-
-  document.getElementById('status_successfully').textContent = '';
-  document.getElementById('status_error').textContent = '';
 });
 
 function updateHeaderPreview() {
@@ -219,3 +205,24 @@ document.addEventListener('DOMContentLoaded', function () {
     updateHeaderPreview();
   }
 });
+
+function showToast(type, message) {
+  const toastContainer = document.getElementById('toast-container');
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerText = message;
+
+  toastContainer.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => {
+      toastContainer.removeChild(toast);
+    }, 500);
+  }, 3000);
+}

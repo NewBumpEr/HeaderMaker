@@ -1,6 +1,7 @@
 node_modules/
 release-builds/
 test/
+idea/
 
 .DS_Store
 Thumbs.db
